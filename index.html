@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: file:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data: file:">
+  <title>Barly</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-dark">
+  <div class="app-container" id="app-container">
+    
+    <!-- KOMPAKT MOD TOGGLE BUTONU (sidebar kapalıyken görünür) -->
+    <button class="compact-toggle-btn hidden" id="compact-toggle-btn" title="Paneli Aç">B</button>
+
+    <!-- SOL YAN PANEL -->
+    <div class="sidebar" id="sidebar">
+      <!-- Sidebar Resize Handle -->
+      <div class="sidebar-resize-handle" id="sidebar-resize-handle"></div>
+      
+      <div class="sidebar-header">
+        <div class="logo" id="logo">B</div>
+        <span class="sidebar-brand">Barly</span>
+      </div>
+      
+      <!-- Hızlı Aksiyonlar -->
+      <div class="sidebar-actions">
+        <button class="sidebar-action-btn primary" id="btn-new-tab" title="Yeni Sekme">
+          <span>+</span> Yeni
+        </button>
+        <button class="sidebar-action-btn incognito" id="btn-incognito" title="Gizli Sekme">
+          🕶️
+        </button>
+      </div>
+      
+      <!-- Sekme Grupları -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-header" data-section="groups">
+          <span class="section-title">
+            <span class="section-icon">📁</span>
+            <span>Gruplar</span>
+          </span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="sidebar-section-content">
+          <div class="tab-groups-bar" id="tab-groups-container"></div>
+        </div>
+      </div>
+      
+      <!-- Sekmeler -->
+      <div class="sidebar-section tabs-section">
+        <div class="sidebar-section-header" data-section="tabs">
+          <span class="section-title">
+            <span class="section-icon">📑</span>
+            <span>Sekmeler</span>
+          </span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="sidebar-section-content">
+          <div class="tabs-list" id="tabs-list"></div>
+        </div>
+      </div>
+      
+      <!-- Araçlar -->
+      <div class="sidebar-section tools-section">
+        <div class="sidebar-section-header" data-section="tools">
+          <span class="section-title">
+            <span class="section-icon">🧰</span>
+            <span>Araçlar</span>
+          </span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="sidebar-section-content">
+          <div class="tools-grid">
+            <div class="tool-item" id="btn-bookmarks" title="Yer İmleri">
+              <span class="tool-item-icon">⭐</span>
+              <span class="tool-item-label">Yer İmleri</span>
+            </div>
+            <div class="tool-item" id="btn-history" title="Geçmiş">
+              <span class="tool-item-icon">📜</span>
+              <span class="tool-item-label">Geçmiş</span>
+            </div>
+            <div class="tool-item" id="btn-downloads" title="İndirmeler">
+              <span class="tool-item-icon">📥</span>
+              <span class="tool-item-label">İndirmeler</span>
+            </div>
+            <div class="tool-item" id="btn-readinglist" title="Çevrimdışı Sayfalar">
+              <span class="tool-item-icon">📴</span>
+              <span class="tool-item-label">Çevrimdışı</span>
+            </div>
+            <div class="tool-item" id="btn-notes" title="Not Defteri">
+              <span class="tool-item-icon">📝</span>
+              <span class="tool-item-label">Notlar</span>
+            </div>
+            <div class="tool-item" id="btn-passwords" title="Şifreler">
+              <span class="tool-item-icon">🔐</span>
+              <span class="tool-item-label">Şifreler</span>
+            </div>
+            <div class="tool-item" id="btn-todos" title="Yapılacaklar">
+              <span class="tool-item-icon">✅</span>
+              <span class="tool-item-label">Yapılacak</span>
+            </div>
+            <div class="tool-item" id="btn-console" title="Konsol">
+              <span class="tool-item-icon">🖥️</span>
+              <span class="tool-item-label">Konsol</span>
+            </div>
+            <div class="tool-item" id="btn-sessions" title="Oturumlar">
+              <span class="tool-item-icon">💾</span>
+              <span class="tool-item-label">Oturumlar</span>
+            </div>
+            <div class="tool-item dev-tool" id="btn-source-code" title="Sitenin Kodları">
+              <span class="tool-item-icon">📄</span>
+              <span class="tool-item-label">Kaynak Kod</span>
+            </div>
+            <div class="tool-item dev-tool" id="btn-css-editor" title="Kod Enjekte Et">
+              <span class="tool-item-icon">💉</span>
+              <span class="tool-item-label">Kod Enjekte</span>
+            </div>
+            <div class="tool-item dev-tool" id="btn-perf-analyze" title="Performans Analizi">
+              <span class="tool-item-icon">🔍</span>
+              <span class="tool-item-label">Performans</span>
+            </div>
+            <div class="tool-item" id="btn-sitelimits" title="Site Limitleri">
+              <span class="tool-item-icon">⏱️</span>
+              <span class="tool-item-label">Limitler</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer -->
+      <div class="sidebar-footer">
+        <button class="sidebar-footer-btn" id="btn-compact" title="Kompakt Mod">◫</button>
+        <button class="sidebar-footer-btn" id="btn-settings" title="Ayarlar">⚙️</button>
+      </div>
+    </div>
+
+    <!-- ANA İÇERİK -->
+    <div class="main-content" id="main-content">
+      
+      <!-- HTTPS Uyarı Çubuğu -->
+      <div class="https-warning hidden" id="https-warning">
+        <span class="https-warning-icon">⚠️</span>
+        <span class="https-warning-text">Dikkat! Bu site güvenli bir bağlantı (HTTPS) kullanmıyor.</span>
+        <button class="https-warning-btn" id="https-warning-continue">Devam Et</button>
+        <button class="https-warning-close" id="https-warning-close">✕</button>
+      </div>
+
+      <!-- Üst Çubuk -->
+      <div class="topbar" id="topbar">
+        <div class="topbar-drag"></div>
+        
+        <div class="nav-controls">
+          <button class="nav-btn" id="btn-back" title="Geri" disabled>◀</button>
+          <button class="nav-btn" id="btn-forward" title="İleri" disabled>▶</button>
+          <button class="nav-btn" id="btn-reload" title="Yenile">⟳</button>
+        </div>
+        
+        <div class="url-bar" id="url-bar">
+          <span class="security-icon" id="security-icon">🔒</span>
+          <input type="text" id="url-input" placeholder="Ara veya adres gir...">
+          <div class="url-actions">
+            <button class="url-action" id="btn-bookmark-add" title="Yer İmi Ekle">☆</button>
+            <button class="url-action" id="btn-readinglist-add" title="Çevrimdışı Kaydet">📴</button>
+          </div>
+        </div>
+        
+        <div class="toolbar-actions">
+          <button class="tool-btn" id="btn-ai" title="AI Asistan">🤖</button>
+          <button class="tool-btn" id="btn-annotate" title="Sayfa Notları">✏️</button>
+          <button class="tool-btn" id="btn-find" title="Sayfa İçi Ara">🔍</button>
+          <button class="tool-btn" id="btn-screenshot" title="Ekran Görüntüsü">📸</button>
+          <button class="tool-btn" id="btn-pip" title="Mini Oynatıcı">🎬</button>
+          <button class="tool-btn" id="btn-split" title="Yan Yana Görünüm">⬚</button>
+          <button class="tool-btn" id="btn-mute" title="Sesi Kapat">🔊</button>
+          <button class="tool-btn" id="btn-reader" title="Okuyucu Modu">📖</button>
+        </div>
+        
+        <div class="window-controls">
+          <button class="win-btn" id="btn-minimize">─</button>
+          <button class="win-btn" id="btn-maximize">□</button>
+          <button class="win-btn close" id="btn-close">✕</button>
+        </div>
+      </div>
+
+      <!-- Sayfa İçi Arama Çubuğu -->
+      <div class="find-bar hidden" id="find-bar">
+        <input type="text" id="find-input" placeholder="Sayfada ara...">
+        <span class="find-count" id="find-count">0/0</span>
+        <button class="find-btn" id="find-prev">▲</button>
+        <button class="find-btn" id="find-next">▼</button>
+        <button class="find-btn" id="find-close">✕</button>
+      </div>
+
+      <!-- İçerik Alanı -->
+      <div class="content-area" id="content-area">
+        
+        <!-- Başlangıç Sayfası -->
+        <div class="start-page" id="start-page">
+          <div class="start-logo">B</div>
+          <h1 class="start-title">Barly</h1>
+          <div class="search-box">
+            <input type="text" id="search-input" placeholder="Aramak için yaz..." autofocus>
+            <button class="search-btn" id="search-btn">→</button>
+          </div>
+          
+          <!-- Hızlı Erişim -->
+          <div class="speed-dial" id="speed-dial">
+            <div class="speed-dial-title">⚡ Hızlı Erişim</div>
+            <div class="speed-dial-grid" id="speed-dial-grid"></div>
+            <button class="speed-dial-add" id="btn-add-speeddial">+ Kısayol Ekle</button>
+          </div>
+          
+          <!-- Zaman Takibi Özeti -->
+          <div class="time-summary" id="time-summary">
+            <h3>📊 Bugünkü Kullanım</h3>
+            <div class="time-stats" id="time-stats"></div>
+          </div>
+        </div>
+
+        <!-- Webview Container -->
+        <div class="webview-wrapper" id="webview-wrapper">
+          <div class="webview-container" id="webview-container"></div>
+          <div class="webview-container split hidden" id="webview-container-split"></div>
+        </div>
+
+        <!-- Tema Düzenleme Butonu -->
+        <button class="theme-customize-btn" id="btn-theme-customize" title="Tema Düzenle">🎨</button>
+      </div>
+
+      <!-- Page Load Timeline -->
+      <div class="page-timeline hidden" id="page-timeline">
+        <div class="timeline-bar" id="timeline-bar"></div>
+      </div>
+
+      <!-- Performans Göstergesi -->
+      <div class="perf-bar" id="perf-bar">
+        <span class="perf-item" id="perf-time">⏱️ 0ms</span>
+        <span class="perf-item" id="perf-memory">💾 0 MB</span>
+        <span class="perf-item" id="perf-bandwidth">📶 0 KB</span>
+        <span class="perf-item" id="perf-tab-memory"></span>
+      </div>
+
+      <!-- Yükleme Çubuğu -->
+      <div class="loading-bar" id="loading-bar"></div>
+    </div>
+
+    <!-- SAĞ PANEL -->
+    <div class="right-panel hidden" id="right-panel">
+      <div class="panel-header">
+        <span class="panel-title" id="panel-title">Panel</span>
+        <button class="panel-close" id="panel-close">✕</button>
+      </div>
+      <div class="panel-content" id="panel-content"></div>
+    </div>
+
+    <!-- AI PANEL -->
+    <div class="ai-panel hidden" id="ai-panel">
+      <div class="ai-panel-header">
+        <span class="ai-panel-title">🤖 AI</span>
+        <div class="ai-panel-tabs-bar" id="ai-panel-tabs"></div>
+        <div class="ai-panel-controls">
+          <button class="ai-ctrl-btn" id="ai-panel-addtab" title="Yeni AI Sekmesi">＋</button>
+          <button class="ai-ctrl-btn" id="ai-panel-split" title="Yan Yana">⬚</button>
+          <button class="ai-ctrl-btn ai-close-btn" id="ai-panel-close" title="Kapat">✕</button>
+        </div>
+      </div>
+      <div class="ai-panel-content" id="ai-panel-content"></div>
+    </div>
+
+  </div>
+
+  <!-- Tab Preview Tooltip -->
+  <div class="tab-preview hidden" id="tab-preview">
+    <img class="tab-preview-img" id="tab-preview-img" src="">
+    <div class="tab-preview-title" id="tab-preview-title"></div>
+  </div>
+
+  <!-- Sağ Tık Menüsü -->
+  <div class="context-menu hidden" id="context-menu">
+    <div class="context-item" data-action="back">◀ Geri</div>
+    <div class="context-item" data-action="forward">▶ İleri</div>
+    <div class="context-item" data-action="reload">⟳ Yenile</div>
+    <div class="context-divider"></div>
+    <div class="context-item" data-action="bookmark">⭐ Yer İmlerine Ekle</div>
+    <div class="context-item" data-action="readinglist">� Çevrimdışı Kaydet</div>
+    <div class="context-divider"></div>
+    <div class="context-item" data-action="copy-url">📎 URL'yi Kopyala</div>
+    <div class="context-item" data-action="qrcode">📱 QR Kod Oluştur</div>
+    <div class="context-item" data-action="share">↗️ Paylaş</div>
+    <div class="context-item" data-action="ask-ai">🤖 AI'ya Sor</div>
+    <div class="context-divider"></div>
+    <div class="context-item" data-action="inspect">🔧 Öğeyi İncele</div>
+  </div>
+
+  <!-- Paylaşım Menüsü -->
+  <div class="share-menu hidden" id="share-menu">
+    <div class="share-title">Paylaş</div>
+    <div class="share-options">
+      <button class="share-btn" data-platform="whatsapp">💬 WhatsApp</button>
+      <button class="share-btn" data-platform="twitter">🐦 Twitter</button>
+      <button class="share-btn" data-platform="telegram">✈️ Telegram</button>
+      <button class="share-btn" data-platform="email">📧 E-posta</button>
+      <button class="share-btn" data-platform="copy">📋 Kopyala</button>
+    </div>
+  </div>
+
+  <!-- Not Defteri Mini Panel -->
+  <div class="notepad-mini hidden" id="notepad-mini">
+    <div class="notepad-header">
+      <span>📝 Hızlı Not</span>
+      <button class="notepad-close" id="notepad-close">✕</button>
+    </div>
+    <textarea class="notepad-content" id="notepad-content" placeholder="Notunuzu yazın..."></textarea>
+    <div class="notepad-actions">
+      <button class="btn btn-sm btn-primary" id="notepad-save">Kaydet</button>
+    </div>
+  </div>
+
+  <!-- Modallar -->
+  <div class="modal hidden" id="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="modal-title" id="modal-title">Modal</span>
+        <button class="modal-close" id="modal-close">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-footer" id="modal-footer"></div>
+    </div>
+  </div>
+
+  <!-- Toast Bildirimleri -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Mouse Gesture Overlay -->
+  <canvas class="gesture-canvas hidden" id="gesture-canvas"></canvas>
+
+  <!-- Mini Player -->
+  <div class="mini-player hidden" id="mini-player">
+    <div class="mini-player-info">
+      <span class="mini-player-icon">🎵</span>
+      <span class="mini-player-title" id="mini-player-title">Medya çalıyor...</span>
+    </div>
+    <div class="mini-player-controls">
+      <button class="mini-player-btn" id="mini-player-playpause" title="Oynat/Duraklat">⏸️</button>
+      <button class="mini-player-btn" id="mini-player-mute" title="Sesi Kapat">🔊</button>
+      <button class="mini-player-btn" id="mini-player-goto" title="Sekmeye Git">↗️</button>
+      <button class="mini-player-btn" id="mini-player-close" title="Kapat">✕</button>
+    </div>
+  </div>
+
+  <!-- Link Preview Tooltip -->
+  <div class="link-preview-tooltip hidden" id="link-preview-tooltip">
+    <img class="link-preview-img hidden" id="link-preview-img" src="">
+    <div class="link-preview-info">
+      <div class="link-preview-title" id="link-preview-title"></div>
+      <div class="link-preview-desc" id="link-preview-desc"></div>
+      <div class="link-preview-url" id="link-preview-url"></div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

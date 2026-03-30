@@ -1,0 +1,18 @@
+{
+  "name": "barly-browser",
+  "version": "1.0.0",
+  "description": "Hızlı, güvenli ve hafif tarayıcı",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "pack": "electron-builder --dir"
+  },
+  "keywords": ["browser", "electron", "barly"],
+  "author": "Baran",
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^41.0.2"
+  }
+}
