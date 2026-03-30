@@ -3365,11 +3365,11 @@ body {
 /* ========== AI PANEL ========== */
 .ai-panel {
   position: absolute;
-  top: 0;
+  top: 52px;
   right: 0;
   width: 480px;
-  height: 100%;
-  background: var(--bg);
+  height: calc(100% - 52px);
+  background: var(--bg-panel);
   border-left: 1px solid var(--border);
   z-index: 200;
   display: flex;
@@ -3393,7 +3393,7 @@ body {
   padding: 0 8px;
   height: 40px;
   border-bottom: 1px solid var(--border);
-  background: var(--bg-secondary);
+  background: var(--bg-sidebar);
   gap: 6px;
   -webkit-app-region: no-drag;
 }
@@ -3436,12 +3436,12 @@ body {
 }
 
 .ai-tab-item:hover {
-  background: var(--hover);
+  background: var(--bg-hover);
   color: var(--text);
 }
 
 .ai-tab-item.active {
-  background: var(--bg);
+  background: var(--bg-panel);
   color: var(--text);
   box-shadow: 0 1px 4px rgba(0,0,0,0.15);
 }
@@ -3499,7 +3499,7 @@ body {
 }
 
 .ai-ctrl-btn:hover {
-  background: var(--hover);
+  background: var(--bg-hover);
   color: var(--text);
 }
 
@@ -3551,7 +3551,7 @@ body {
 }
 
 .ai-service-picker {
-  background: var(--bg-secondary);
+  background: var(--bg-sidebar);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 20px;
@@ -3575,7 +3575,7 @@ body {
 }
 
 .ai-service-card:hover {
-  background: var(--hover);
+  background: var(--bg-hover);
   border-color: var(--border);
   transform: translateY(-2px);
 }
@@ -3598,7 +3598,7 @@ body {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: var(--bg-secondary);
+  background: var(--bg-sidebar);
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 10px 16px;
@@ -3660,13 +3660,13 @@ body {
 }
 
 .mini-player-btn:hover {
-  background: var(--hover);
+  background: var(--bg-hover);
 }
 
 /* ========== LINK PREVIEW TOOLTIP ========== */
 .link-preview-tooltip {
   position: fixed;
-  background: var(--bg-secondary);
+  background: var(--bg-sidebar);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 12px;
@@ -3743,7 +3743,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 8px 12px;
-  background: var(--bg);
+  background: var(--bg-card);
   border-radius: 8px;
   margin-bottom: 6px;
   border: 1px solid var(--border);
