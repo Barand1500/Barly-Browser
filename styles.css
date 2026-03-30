@@ -3511,20 +3511,20 @@ body {
 .ai-panel-content {
   flex: 1;
   overflow: hidden;
-  display: flex;
-  flex-direction: row;
+  position: relative;
   min-height: 0;
 }
 
 .ai-panel-content.ai-split {
-  flex-direction: row;
+  /* handled by JS positioning */
 }
 
 .ai-webview {
-  flex: 1 1 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  min-height: 0;
-  min-width: 0;
   border: none;
   display: none;
 }

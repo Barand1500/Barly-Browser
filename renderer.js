@@ -4275,13 +4275,16 @@ function addAiTab(serviceKey) {
 
 function switchAiTab(id) {
   activeAiTabId = id;
-  aiTabs.forEach(t => {
+  const count = aiTabs.length;
+  aiTabs.forEach((t, i) => {
     if (aiSplitMode) {
       t.webview.style.display = 'block';
-      t.webview.style.flex = `1 1 ${100 / aiTabs.length}%`;
+      t.webview.style.left = `${(100 / count) * i}%`;
+      t.webview.style.width = `${100 / count}%`;
     } else {
       t.webview.style.display = t.id === id ? 'block' : 'none';
-      t.webview.style.flex = '1 1 100%';
+      t.webview.style.left = '0';
+      t.webview.style.width = '100%';
     }
   });
   renderAiTabs();
