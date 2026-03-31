@@ -85,7 +85,6 @@ body {
   height: 100vh;
   background: var(--bg-dark);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
 }
 
 /* ========== KOMPAKT MOD - TAM KAPANMA ========== */
@@ -3364,11 +3363,11 @@ body {
 
 /* ========== AI PANEL ========== */
 .ai-panel {
-  position: absolute;
-  top: 52px;
+  position: fixed;
+  top: 0;
   right: 0;
-  width: 480px;
-  height: calc(100% - 52px);
+  width: 420px;
+  height: 100vh;
   background: var(--bg-panel);
   border-left: 1px solid var(--border);
   z-index: 200;
@@ -3510,23 +3509,28 @@ body {
 
 .ai-panel-content {
   flex: 1;
-  overflow: hidden;
   position: relative;
-  min-height: 0;
+  overflow: hidden;
 }
 
 .ai-panel-content.ai-split {
-  /* handled by JS positioning */
+  display: flex;
 }
 
 .ai-webview {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
   border: none;
   display: none;
+}
+
+.ai-webview.active {
+  display: flex;
 }
 
 .ai-panel-content.ai-split .ai-webview {

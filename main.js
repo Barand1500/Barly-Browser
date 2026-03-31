@@ -141,6 +141,32 @@ function createWindow() {
   mainWindow.on('unmaximize', () => {
     mainWindow.webContents.send('window-maximized', false);
   });
+
+  // ========== DOWNLOAD TRACKING ==========
+  session.defaultSession.on('will-download', (event, item) => {
+    const fileName = item.getFilename();
+    const totalBytes = item.getTotalBytes();
+    const startTime = Date.now();
+    const id = startTime;
+
+    mainWindow.webContents.send('download-started', {
+      id, fileName, totalBytes, url: item.getURLChain()[0] || ''
+    });
+
+    item.on('updated', (e, itemState) => {
+      if (itemState === 'progressing') {
+        mainWindow.webContents.send('download-progress', {
+          id, receivedBytes: item.getReceivedBytes(), totalBytes: item.getTotalBytes()
+        });
+      }
+    });
+
+    item.once('done', (e, itemState) => {
+      mainWindow.webContents.send('download-done', {
+        id, state: itemState, filePath: item.getSavePath(), totalBytes: item.getTotalBytes()
+      });
+    });
+  });
 }
 
 // ========== PENCERE KONTROLLER ==========
@@ -578,12 +604,38 @@ ipcMain.handle('archive-page', (e, url) => {
 });
 
 // ========== REKLAM ENGELLEYİCİ ==========
+const AD_BLOCK_URLS = [
+  '*://*.doubleclick.net/*', '*://*.googlesyndication.com/*', '*://*.googleadservices.com/*',
+  '*://*.adnxs.com/*', '*://*.ads.yahoo.com/*', '*://*.advertising.com/*',
+  '*://*.outbrain.com/*', '*://*.taboola.com/*', '*://*.moatads.com/*',
+  '*://*.amazon-adsystem.com/*', '*://*.adobedtm.com/*', '*://*.adform.net/*',
+  '*://*.adsrvr.org/*', '*://*.criteo.com/*', '*://*.criteo.net/*',
+  '*://*.pubmatic.com/*', '*://*.rubiconproject.com/*', '*://*.smartadserver.com/*',
+  '*://*.sharethrough.com/*', '*://*.smaato.net/*', '*://*.indexexchange.com/*',
+  '*://*.openx.net/*', '*://*.bidswitch.net/*', '*://*.mediavine.com/*',
+  '*://*.mgid.com/*', '*://*.revenuehits.com/*', '*://*.propellerads.com/*',
+  '*://*.popads.net/*', '*://*.popcash.net/*', '*://*.adcolony.com/*',
+  '*://*.unity3d.com/ads/*', '*://*.vungle.com/*', '*://*.chartboost.com/*',
+  '*://*.inmobi.com/*', '*://*.applovin.com/*', '*://*.mopub.com/*',
+  '*://*.admob.com/*', '*://*.facebook.com/tr/*', '*://*.facebook.net/signals/*',
+  '*://*.quantserve.com/*', '*://*.scorecardresearch.com/*', '*://*.bluekai.com/*',
+  '*://*.eyeota.net/*', '*://*.exelator.com/*', '*://*.mathtag.com/*',
+  '*://*.serving-sys.com/*', '*://*.2mdn.net/*', '*://*.33across.com/*',
+  '*://*.adtechus.com/*', '*://*.casalemedia.com/*', '*://*.contextweb.com/*',
+  '*://*.yieldmo.com/*', '*://*.sovrn.com/*', '*://*.lijit.com/*'
+];
+
+function enableAdBlock() {
+  session.defaultSession.webRequest.onBeforeRequest({ urls: AD_BLOCK_URLS }, (details, callback) => {
+    callback({ cancel: true });
+  });
+}
+
 ipcMain.handle('adblock-toggle', (e, enabled) => {
-  // Basit reklam engelleme
   if (enabled) {
-    session.defaultSession.webRequest.onBeforeRequest({ urls: ['*://*.doubleclick.net/*', '*://*.googlesyndication.com/*', '*://*.googleadservices.com/*', '*://*.adnxs.com/*'] }, (details, callback) => {
-      callback({ cancel: true });
-    });
+    enableAdBlock();
+  } else {
+    session.defaultSession.webRequest.onBeforeRequest({ urls: ['<all_urls>'] }, null);
   }
   return enabled;
 });
@@ -705,10 +757,7 @@ app.whenReady().then(() => {
   // Startup ad blocker
   const savedSettings = readJSON(SETTINGS_FILE, DEFAULT_SETTINGS);
   if (savedSettings.adBlockEnabled) {
-    session.defaultSession.webRequest.onBeforeRequest(
-      { urls: ['*://*.doubleclick.net/*', '*://*.googlesyndication.com/*', '*://*.googleadservices.com/*', '*://*.adnxs.com/*', '*://*.ads.yahoo.com/*', '*://*.advertising.com/*', '*://*.outbrain.com/*', '*://*.taboola.com/*', '*://*.moatads.com/*'] },
-      (details, callback) => { callback({ cancel: true }); }
-    );
+    enableAdBlock();
   }
   createWindow();
 });

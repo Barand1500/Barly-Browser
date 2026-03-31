@@ -4265,7 +4265,7 @@ function addAiTab(serviceKey) {
   webview.id = id;
   webview.className = 'ai-webview';
   webview.setAttribute('allowpopups', '');
-  webview.src = svc.url;
+  webview.setAttribute('src', svc.url);
   aiPanelContent.appendChild(webview);
 
   aiTabs.push({ id, serviceKey, webview });
@@ -4275,16 +4275,23 @@ function addAiTab(serviceKey) {
 
 function switchAiTab(id) {
   activeAiTabId = id;
-  const count = aiTabs.length;
-  aiTabs.forEach((t, i) => {
+  aiTabs.forEach(t => {
     if (aiSplitMode) {
-      t.webview.style.display = 'block';
-      t.webview.style.left = `${(100 / count) * i}%`;
-      t.webview.style.width = `${100 / count}%`;
+      t.webview.classList.add('active');
+      t.webview.style.width = `${100 / aiTabs.length}%`;
+      t.webview.style.position = 'relative';
+      t.webview.style.right = 'auto';
+      t.webview.style.bottom = 'auto';
     } else {
-      t.webview.style.display = t.id === id ? 'block' : 'none';
-      t.webview.style.left = '0';
-      t.webview.style.width = '100%';
+      if (t.id === id) {
+        t.webview.classList.add('active');
+        t.webview.style.width = '100%';
+        t.webview.style.position = 'absolute';
+        t.webview.style.right = '0';
+        t.webview.style.bottom = '0';
+      } else {
+        t.webview.classList.remove('active');
+      }
     }
   });
   renderAiTabs();
