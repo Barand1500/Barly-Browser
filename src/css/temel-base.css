@@ -1,0 +1,189 @@
+/* ========== BARLY BROWSER v4.0 - TEMEL STİLLER ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ========== TEMA DEĞİŞKENLERİ ========== */
+.theme-dark {
+  --bg-dark: #09090b;
+  --bg-sidebar: #0f0f11;
+  --bg-main: #18181b;
+  --bg-hover: rgba(255,255,255,0.06);
+  --bg-active: rgba(255,255,255,0.1);
+  --bg-panel: #141416;
+  --bg-input: #0c0c0e;
+  --bg-card: rgba(255,255,255,0.03);
+  --accent: #8b5cf6;
+  --accent-hover: #a78bfa;
+  --accent-dim: #7c3aed;
+  --accent-glow: rgba(139, 92, 246, 0.3);
+  --text: #fafafa;
+  --text-dim: #a1a1aa;
+  --text-muted: #52525b;
+  --border: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.12);
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --incognito: #c084fc;
+  --incognito-bg: rgba(192, 132, 252, 0.12);
+  --gradient-1: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  --gradient-2: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+}
+
+.theme-light {
+  --bg-dark: #f8f8fa;
+  --bg-sidebar: #ffffff;
+  --bg-main: #f4f4f5;
+  --bg-hover: rgba(0,0,0,0.04);
+  --bg-active: rgba(0,0,0,0.08);
+  --bg-panel: #ffffff;
+  --bg-input: #f0f0f2;
+  --bg-card: rgba(0,0,0,0.02);
+  --accent: #7c3aed;
+  --accent-hover: #8b5cf6;
+  --accent-dim: #6d28d9;
+  --accent-glow: rgba(124, 58, 237, 0.2);
+  --text: #18181b;
+  --text-dim: #52525b;
+  --text-muted: #a1a1aa;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.1);
+  --success: #16a34a;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --incognito: #9333ea;
+  --incognito-bg: rgba(147, 51, 234, 0.08);
+  --gradient-1: linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
+  --gradient-2: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+}
+
+/* ========== İNCOGNİTO TEMA ========== */
+.incognito-mode {
+  --bg-dark: #0a0812;
+  --bg-sidebar: #110e18;
+  --bg-main: #16121f;
+  --bg-panel: #12101a;
+  --bg-input: #0d0b14;
+}
+
+body {
+  font-family: var(--ui-font, 'Inter'), 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text);
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========== ANA KONTEYNER ========== */
+.app-container {
+  display: flex;
+  height: 100vh;
+  background: var(--bg-dark);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========== KOMPAKT MOD ========== */
+.app-container.compact .sidebar {
+  width: 0 !important;
+  min-width: 0 !important;
+  padding: 0;
+  overflow: hidden;
+  border-right: none;
+}
+
+.app-container.compact .sidebar * {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.compact-toggle-btn {
+  position: fixed;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 48px;
+  background: var(--gradient-1);
+  border: none;
+  border-radius: 0 10px 10px 0;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 200;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px var(--accent-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.compact-toggle-btn:hover {
+  width: 40px;
+  box-shadow: 0 6px 20px var(--accent-glow);
+}
+
+.compact-toggle-btn.hidden {
+  display: none;
+}
+
+/* ========== ANA İÇERİK ========== */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-main);
+  overflow: hidden;
+  position: relative;
+  min-height: 0;
+  min-width: 0;
+}
+
+/* ========== İÇERİK ALANI ========== */
+.content-area {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ========== HIDDEN ========== */
+.hidden {
+  display: none !important;
+}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ========== GESTURE CANVAS ========== */
+.gesture-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.gesture-canvas.hidden {
+  display: none;
+}

@@ -1,0 +1,312 @@
+/* ========== ÜST ÇUBUK ========== */
+.topbar {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  background: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border);
+  -webkit-app-region: drag;
+}
+
+.topbar-drag {
+  flex: 0 0 60px;
+}
+
+.nav-controls {
+  display: flex;
+  gap: 4px;
+  -webkit-app-region: no-drag;
+}
+
+.nav-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--text-dim);
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ========== URL BAR ========== */
+.url-bar {
+  flex: 1;
+  max-width: 640px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0 14px;
+  gap: 10px;
+  transition: all 0.2s ease;
+  -webkit-app-region: no-drag;
+}
+
+.url-bar:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.security-icon {
+  font-size: 14px;
+}
+
+#url-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-size: 13px;
+}
+
+#url-input::placeholder {
+  color: var(--text-muted);
+}
+
+.url-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.url-action {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--text-dim);
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.url-action:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.url-action.bookmarked {
+  color: var(--warning);
+}
+
+/* ========== TOOLBAR ACTIONS ========== */
+.toolbar-actions {
+  display: flex;
+  gap: 4px;
+  -webkit-app-region: no-drag;
+}
+
+.tool-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--text-dim);
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tool-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.tool-btn.active {
+  background: var(--accent);
+  color: white;
+}
+
+.tool-btn.muted {
+  color: var(--danger);
+}
+
+/* ========== WINDOW CONTROLS ========== */
+.window-controls {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+  -webkit-app-region: no-drag;
+}
+
+.win-btn {
+  width: 38px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--text-dim);
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.win-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.win-btn.close:hover {
+  background: var(--danger);
+  color: white;
+}
+
+/* ========== FIND BAR ========== */
+.find-bar {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  z-index: 100;
+}
+
+.find-bar.hidden {
+  display: none;
+}
+
+#find-input {
+  width: 220px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-input);
+  padding: 0 12px;
+  color: var(--text);
+  font-size: 13px;
+  outline: none;
+}
+
+#find-input:focus {
+  border-color: var(--accent);
+}
+
+.find-count {
+  font-size: 12px;
+  color: var(--text-dim);
+  min-width: 50px;
+  text-align: center;
+}
+
+.find-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: var(--bg-hover);
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--text-dim);
+  transition: all 0.15s ease;
+}
+
+.find-btn:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* ========== HTTPS UYARI ========== */
+.https-warning {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: rgba(245, 158, 11, 0.12);
+  border-bottom: 1px solid var(--warning);
+  font-size: 13px;
+  color: var(--warning);
+  z-index: 60;
+  animation: slideDown 0.3s ease;
+}
+
+.https-warning.hidden {
+  display: none;
+}
+
+.https-warning-icon {
+  font-size: 16px;
+}
+
+.https-warning-text {
+  flex: 1;
+}
+
+.https-warning-btn {
+  padding: 4px 12px;
+  border: 1px solid var(--warning);
+  background: transparent;
+  border-radius: 6px;
+  color: var(--warning);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.https-warning-btn:hover {
+  background: var(--warning);
+  color: white;
+}
+
+.https-warning-close {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--warning);
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ========== ANNOTATION MODE ========== */
+.tool-btn.annotation-active {
+  background: var(--accent) !important;
+  color: #fff !important;
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.5);
+}
+
+.ai-btn-active {
+  background: var(--accent) !important;
+  color: #fff !important;
+}

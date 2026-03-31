@@ -1,0 +1,351 @@
+/* ========== SEKMELER - MODERN KARTLAR ========== */
+.tabs-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.tabs-section .sidebar-section-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.tabs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tabs-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.tabs-list::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 2px;
+}
+
+.tab-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--bg-card);
+  position: relative;
+  border: 1px solid transparent;
+}
+
+.tab-item[draggable="true"] {
+  cursor: grab;
+}
+
+.tab-item.dragging {
+  opacity: 0.4;
+  transform: scale(0.95);
+}
+
+.tab-item.drag-over {
+  border-top: 2px solid var(--accent);
+}
+
+.tab-item:hover {
+  background: var(--bg-hover);
+  border-color: var(--border);
+}
+
+.tab-item.active {
+  background: var(--bg-active);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 2px 8px var(--accent-glow);
+}
+
+.tab-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: var(--tab-group-color, var(--accent));
+  border-radius: 0 3px 3px 0;
+  transition: height 0.15s ease;
+}
+
+.tab-item.grouped::before {
+  height: 50%;
+}
+
+.tab-item.active::before {
+  height: 60%;
+  background: var(--accent);
+}
+
+/* ========== GİZLİ SEKME ========== */
+.tab-item.incognito {
+  background: var(--incognito-bg);
+  border: 1px solid var(--incognito);
+}
+
+.tab-item.incognito::after {
+  content: '🕶️';
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  font-size: 14px;
+  background: var(--incognito);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(192, 132, 252, 0.4);
+  z-index: 2;
+}
+
+.tab-item.incognito:hover {
+  background: rgba(192, 132, 252, 0.18);
+}
+
+.tab-item.incognito.active {
+  box-shadow: 0 0 0 1px var(--incognito), 0 2px 12px rgba(192, 132, 252, 0.4);
+}
+
+/* ========== ASKIYA ALINMIŞ SEKME ========== */
+.tab-item.suspended {
+  opacity: 0.35;
+  filter: grayscale(0.8);
+  border-style: dashed;
+  border-color: var(--text-muted);
+}
+
+.tab-item.suspended .tab-title {
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.tab-item.suspended::after {
+  content: '👻';
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  font-size: 12px;
+}
+
+/* ========== TAB MEMORY BADGE ========== */
+.tab-memory {
+  font-size: 9px;
+  color: var(--text-muted);
+  background: var(--bg-hover);
+  padding: 1px 5px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.tab-favicon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  background: var(--bg-hover);
+  border-radius: 6px;
+}
+
+.tab-favicon img {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+}
+
+.tab-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tab-title {
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text);
+}
+
+.tab-url {
+  font-size: 10px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  align-items: center;
+}
+
+.tab-item:hover .tab-actions {
+  opacity: 1;
+}
+
+.tab-audio {
+  font-size: 12px;
+  animation: pulse 1.5s infinite;
+}
+
+.tab-mute-btn {
+  font-size: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+  color: var(--text);
+  line-height: 1;
+}
+
+.tab-mute-btn:hover {
+  background: var(--bg-hover);
+}
+
+.tab-mute-btn.hidden {
+  display: none;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.tab-close {
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab-close:hover {
+  background: var(--danger);
+  color: white;
+  transform: scale(1.1);
+}
+
+/* ========== TAB PREVIEW TOOLTIP ========== */
+.tab-preview {
+  position: fixed;
+  width: 240px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.tab-preview.hidden {
+  display: none;
+}
+
+.tab-preview-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+}
+
+.tab-preview-title {
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ========== SEKME GRUPLARI ========== */
+.tab-groups-bar {
+  display: flex;
+  gap: 6px;
+  padding: 8px 12px;
+  overflow-x: auto;
+  flex-wrap: wrap;
+}
+
+.tab-groups-bar::-webkit-scrollbar {
+  height: 0;
+}
+
+.tab-group-chip {
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background: var(--bg-hover);
+  color: var(--text-dim);
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.tab-group-chip:hover {
+  background: var(--bg-active);
+  color: var(--text);
+}
+
+.tab-group-chip.active {
+  color: white;
+  border-color: transparent;
+}
+
+.tab-group-chip .group-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.tab-group-chip .group-icon {
+  font-size: 12px;
+}
+
+.tab-group-chip.add {
+  background: transparent;
+  border: 1px dashed var(--border-strong);
+  color: var(--text-muted);
+}
+
+.tab-group-chip.add:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}

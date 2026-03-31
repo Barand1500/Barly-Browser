@@ -1,0 +1,235 @@
+/* ========== AI PANEL ========== */
+.ai-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 420px;
+  height: 100vh;
+  background: var(--bg-panel);
+  border-left: 1px solid var(--border);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.3);
+  animation: slideInRight 0.2s ease;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.ai-panel.hidden {
+  display: none;
+}
+
+.ai-panel-header {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  height: 40px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-sidebar);
+  gap: 6px;
+  -webkit-app-region: no-drag;
+}
+
+.ai-panel-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  padding: 0 4px;
+}
+
+.ai-panel-tabs-bar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  padding: 4px 0;
+}
+
+.ai-panel-tabs-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.ai-tab-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  white-space: nowrap;
+  color: var(--text-muted);
+  transition: all 0.15s;
+  position: relative;
+}
+
+.ai-tab-item:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.ai-tab-item.active {
+  background: var(--bg-panel);
+  color: var(--text);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.ai-tab-icon {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.ai-tab-name {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.ai-tab-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 10px;
+  cursor: pointer;
+  padding: 1px 3px;
+  border-radius: 4px;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.ai-tab-item:hover .ai-tab-close {
+  opacity: 1;
+}
+
+.ai-tab-close:hover {
+  background: rgba(239,68,68,0.2);
+  color: #ef4444;
+}
+
+.ai-panel-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.ai-ctrl-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 15px;
+  cursor: pointer;
+  padding: 4px 7px;
+  border-radius: 6px;
+  transition: all 0.15s;
+  line-height: 1;
+}
+
+.ai-ctrl-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.ai-close-btn:hover {
+  background: rgba(239,68,68,0.15);
+  color: #ef4444;
+}
+
+.ai-panel-content {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-panel-content.ai-split {
+  display: flex;
+}
+
+.ai-webview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: none;
+}
+
+.ai-webview.active {
+  display: flex;
+}
+
+.ai-panel-content.ai-split .ai-webview {
+  border-right: 1px solid var(--border);
+}
+
+.ai-panel-content.ai-split .ai-webview:last-child {
+  border-right: none;
+}
+
+/* ========== AI SERVICE PICKER ========== */
+.ai-picker-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.15s ease;
+}
+
+.ai-service-picker {
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  max-width: 480px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+.ai-service-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+  border: 1px solid transparent;
+}
+
+.ai-service-card:hover {
+  background: var(--bg-hover);
+  border-color: var(--border);
+  transform: translateY(-2px);
+}
+
+.ai-svc-icon {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.ai-svc-name {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+}

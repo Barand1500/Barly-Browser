@@ -1,0 +1,249 @@
+/* ========== YAN PANEL (SIDEBAR) ========== */
+.sidebar {
+  width: 260px;
+  min-width: 200px;
+  background: var(--bg-sidebar);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border);
+  z-index: 100;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.sidebar-resize-handle {
+  position: absolute;
+  right: -3px;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  cursor: col-resize;
+  z-index: 150;
+  transition: background 0.2s ease;
+}
+
+.sidebar-resize-handle:hover,
+.sidebar-resize-handle.active {
+  background: var(--accent);
+}
+
+.sidebar-header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+  background: var(--gradient-1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px var(--accent-glow);
+  flex-shrink: 0;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px var(--accent-glow);
+}
+
+.sidebar-brand {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+
+.sidebar-actions {
+  padding: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.sidebar-action-btn {
+  flex: 1;
+  height: 36px;
+  border: none;
+  background: var(--bg-hover);
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  transition: all 0.15s ease;
+  gap: 6px;
+}
+
+.sidebar-action-btn:hover {
+  background: var(--bg-active);
+  color: var(--text);
+}
+
+.sidebar-action-btn.primary {
+  background: var(--accent);
+  color: white;
+}
+
+.sidebar-action-btn.primary:hover {
+  background: var(--accent-hover);
+}
+
+.sidebar-action-btn.incognito:hover {
+  background: var(--incognito-bg);
+  color: var(--incognito);
+}
+
+/* ========== AÇILIR/KAPANIR BÖLÜMLER ========== */
+.sidebar-section {
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-section:last-child {
+  border-bottom: none;
+}
+
+.sidebar-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.sidebar-section-header:hover {
+  background: var(--bg-hover);
+}
+
+.sidebar-section-header .section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+.sidebar-section-header .section-icon {
+  font-size: 12px;
+}
+
+.sidebar-section-header .toggle-icon {
+  font-size: 10px;
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+}
+
+.sidebar-section.collapsed .toggle-icon {
+  transform: rotate(-90deg);
+}
+
+.sidebar-section-content {
+  max-height: 1000px;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.sidebar-section.collapsed .sidebar-section-content {
+  max-height: 0;
+  padding: 0;
+}
+
+/* ========== ARAÇLAR BÖLÜMÜ ========== */
+.tools-section .sidebar-section-content {
+  padding: 8px;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.tool-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background: var(--bg-card);
+  border: 1px solid transparent;
+}
+
+.tool-item:hover {
+  background: var(--bg-hover);
+  border-color: var(--border);
+  transform: translateY(-2px);
+}
+
+.tool-item.active {
+  background: var(--accent);
+  color: white;
+}
+
+.tool-item-icon {
+  font-size: 18px;
+}
+
+.tool-item-label {
+  font-size: 10px;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.tool-item:hover .tool-item-label {
+  color: var(--text);
+}
+
+/* ========== SIDEBAR FOOTER ========== */
+.sidebar-footer {
+  padding: 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+}
+
+.sidebar-footer-btn {
+  flex: 1;
+  height: 40px;
+  border: none;
+  background: var(--bg-hover);
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  transition: all 0.15s ease;
+}
+
+.sidebar-footer-btn:hover {
+  background: var(--bg-active);
+  color: var(--text);
+}
+
+.sidebar-footer-btn.active {
+  background: var(--accent);
+  color: white;
+}

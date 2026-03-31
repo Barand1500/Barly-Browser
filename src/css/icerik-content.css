@@ -1,0 +1,385 @@
+/* ========== BAŞLANGIÇ SAYFASI ========== */
+.start-page {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: radial-gradient(ellipse at top, var(--bg-main) 0%, var(--bg-dark) 100%);
+  z-index: 10;
+  animation: fadeIn 0.3s ease;
+}
+
+.start-page.hidden {
+  display: none;
+}
+
+.incognito-mode .start-page {
+  background: radial-gradient(ellipse at top, #16121f 0%, #0a0812 100%);
+}
+
+.incognito-mode .url-bar {
+  background: linear-gradient(135deg, #1a0e2e 0%, #0d0820 100%);
+  border-color: var(--incognito);
+  box-shadow: 0 0 12px rgba(192, 132, 252, 0.15), inset 0 0 8px rgba(192, 132, 252, 0.05);
+}
+
+.incognito-mode .url-bar:focus-within {
+  border-color: var(--incognito);
+  box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.2), 0 0 20px rgba(192, 132, 252, 0.15);
+}
+
+.incognito-mode #url-input::placeholder {
+  color: var(--incognito);
+  opacity: 0.6;
+  font-style: italic;
+}
+
+.incognito-mode .security-icon {
+  color: var(--incognito);
+}
+
+.incognito-mode .search-box #search-input {
+  background: linear-gradient(135deg, #1a0e2e 0%, #0d0820 100%);
+  border-color: var(--incognito);
+  box-shadow: 0 0 20px rgba(192, 132, 252, 0.12), inset 0 0 12px rgba(192, 132, 252, 0.04);
+  color: #e9d5ff;
+}
+
+.incognito-mode .search-box #search-input:focus {
+  border-color: var(--incognito);
+  box-shadow: 0 0 0 4px rgba(192, 132, 252, 0.2), 0 0 30px rgba(192, 132, 252, 0.15);
+}
+
+.incognito-mode .search-box #search-input::placeholder {
+  color: var(--incognito);
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.incognito-mode .search-btn {
+  background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+  box-shadow: 0 4px 16px rgba(147, 51, 234, 0.4);
+}
+
+.incognito-mode .start-logo {
+  background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+  box-shadow: 0 8px 40px rgba(147, 51, 234, 0.3);
+}
+
+.incognito-mode .start-title {
+  color: #c4b5fd;
+}
+
+.start-logo {
+  width: 100px;
+  height: 100px;
+  background: var(--gradient-1);
+  border-radius: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 40px var(--accent-glow);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.start-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 32px;
+  letter-spacing: -0.5px;
+}
+
+.search-box {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  gap: 10px;
+}
+
+#search-input {
+  flex: 1;
+  height: 56px;
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  background: var(--bg-input);
+  padding: 0 24px;
+  color: var(--text);
+  font-size: 16px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+#search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+.search-btn {
+  width: 56px;
+  height: 56px;
+  border: none;
+  background: var(--gradient-1);
+  border-radius: 16px;
+  font-size: 22px;
+  cursor: pointer;
+  color: white;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 16px var(--accent-glow);
+}
+
+.search-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 24px var(--accent-glow);
+}
+
+/* ========== SPEED DIAL ========== */
+.speed-dial {
+  margin-top: 48px;
+  width: 100%;
+  max-width: 640px;
+}
+
+.speed-dial-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+  padding-left: 4px;
+}
+
+.speed-dial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.speed-dial-item {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.speed-dial-item:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-strong);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.speed-dial-icon {
+  font-size: 32px;
+}
+
+.speed-dial-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-dim);
+  max-width: 90px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.speed-dial-remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: var(--danger);
+  border-radius: 50%;
+  font-size: 10px;
+  cursor: pointer;
+  color: white;
+  opacity: 0;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.speed-dial-item:hover .speed-dial-remove {
+  opacity: 1;
+}
+
+.speed-dial-add {
+  padding: 14px 24px;
+  border: 2px dashed var(--border-strong);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+
+.speed-dial-add:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-glow);
+}
+
+/* ========== TIME SUMMARY ========== */
+.time-summary {
+  margin-top: 48px;
+  width: 100%;
+  max-width: 480px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.time-summary h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.time-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.time-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.time-stat-item:hover {
+  background: var(--bg-hover);
+}
+
+.time-stat-label {
+  width: 120px;
+  font-size: 12px;
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.time-stat-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-hover);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.time-stat-fill {
+  height: 100%;
+  background: var(--gradient-2);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.time-stat-value {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  min-width: 50px;
+  text-align: right;
+}
+
+/* ========== WEBVIEW ========== */
+.webview-wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.webview-wrapper.split-active .webview-container {
+  width: 50%;
+  border-right: 1px solid var(--border);
+}
+
+.webview-wrapper.split-active .webview-container.split {
+  width: 50%;
+}
+
+.webview-container {
+  flex: 1;
+  position: relative;
+}
+
+.webview-container webview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  border: none;
+}
+
+.webview-container webview.active {
+  display: flex;
+}
+
+/* ========== WALLPAPER ========== */
+.start-page.has-wallpaper {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.start-page.has-wallpaper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.start-page.has-wallpaper > * {
+  position: relative;
+  z-index: 1;
+}

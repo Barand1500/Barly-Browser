@@ -1,0 +1,111 @@
+/* ========== SETTINGS ========== */
+.settings-section {
+  margin-bottom: 28px;
+}
+
+.settings-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+}
+
+.settings-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.settings-item-title {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ========== SHORTCUTS MANAGEMENT ========== */
+.shortcuts-list {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.shortcut-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 6px;
+}
+
+.shortcut-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.shortcut-key-btn {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Consolas', 'Fira Code', monospace;
+  transition: all 0.15s ease;
+  min-width: 80px;
+  text-align: center;
+}
+
+.shortcut-key-btn:hover {
+  border-color: var(--accent);
+  background: var(--bg-hover);
+}
+
+.shortcut-key-btn.recording {
+  border-color: var(--warning);
+  color: var(--warning);
+  animation: pulse 1s infinite;
+  background: rgba(245,158,11,0.08);
+}
+
+/* ========== TOGGLE ========== */
+.toggle {
+  width: 48px;
+  height: 26px;
+  background: var(--bg-active);
+  border-radius: 13px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.toggle.active {
+  background: var(--accent);
+}
+
+.toggle.active::after {
+  left: 25px;
+}
